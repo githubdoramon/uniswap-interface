@@ -5,14 +5,16 @@ import Badge from 'components/Badge'
 import { getChainInfo } from 'constants/chainInfo'
 import { SupportedChainId, SupportedL2ChainId } from 'constants/chains'
 import useCurrencyLogoURIs from 'lib/hooks/useCurrencyLogoURIs'
-import { ReactNode, useCallback, useState } from 'react'
+import { ReactNode, useCallback, useEffect, useState } from 'react'
 import { AlertCircle, AlertTriangle, ArrowUpCircle, CheckCircle } from 'react-feather'
+import { animated, useSpring } from 'react-spring'
 import { Text } from 'rebass'
 import { useIsTransactionConfirmed, useTransaction } from 'state/transactions/hooks'
 import styled, { useTheme } from 'styled-components/macro'
 import { isL2ChainId } from 'utils/chains'
 
 import Circle from '../../assets/images/blue-loader.svg'
+import SwapSuccess from '../../assets/images/swap_success.svg'
 import { ExternalLink, ThemedText } from '../../theme'
 import { CloseIcon, CustomLightSpinner } from '../../theme'
 import { ExplorerDataType, getExplorerLink } from '../../utils/getExplorerLink'
@@ -48,6 +50,13 @@ const StyledLogo = styled.img`
   height: 16px;
   width: 16px;
   margin-left: 6px;
+`
+
+const SwapSuccessDiv = styled(animated.div)`
+  position: absolute;
+  right: 0;
+  top: 50%;
+  z-index: 100000;
 `
 
 function ConfirmationPendingContent({
@@ -239,6 +248,49 @@ function L2Content({
 }) {
   const theme = useTheme()
 
+  const [springs, api] = useSpring(() => ({
+    translateX: 250,
+    translateY: '-50%',
+    rotate: '-30deg',
+  }))
+
+  const animateIn = async () => {
+    await api.start({
+      from: {
+        translateX: 250,
+        translateY: '-50%',
+        rotate: '-30deg',
+      },
+      to: {
+        translateX: 0,
+        translateY: '-50%',
+        rotate: '-45deg',
+      },
+    })
+  }
+
+  const animateOut = async () => {
+    await api.start({
+      to: {
+        translateX: 250,
+        translateY: '-50%',
+        rotate: '-30deg',
+      },
+      from: {
+        translateX: 0,
+        translateY: '-50%',
+        rotate: '-45deg',
+      },
+    })
+  }
+
+  const showAndHide = async () => {
+    await animateIn()
+    setTimeout(async () => {
+      await animateOut()
+    }, 4000)
+  }
+
   const transaction = useTransaction(hash)
   const confirmed = useIsTransactionConfirmed(hash)
   const transactionSuccess = transaction?.receipt?.status === 1
@@ -250,8 +302,15 @@ function L2Content({
 
   const info = getChainInfo(chainId)
 
+  useEffect(() => {
+    transactionSuccess && showAndHide()
+  }, [transactionSuccess])
+
   return (
     <Wrapper>
+      <SwapSuccessDiv style={{ ...springs }}>
+        <img src={SwapSuccess} style={{ width: '200px' }} />
+      </SwapSuccessDiv>
       <Section inline={inline}>
         {!inline && (
           <RowBetween mb="16px">

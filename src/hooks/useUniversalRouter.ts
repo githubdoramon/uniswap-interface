@@ -5,7 +5,7 @@ import { sendAnalyticsEvent } from '@uniswap/analytics'
 import { SwapEventName } from '@uniswap/analytics-events'
 import { Trade } from '@uniswap/router-sdk'
 import { Currency, Percent, TradeType } from '@uniswap/sdk-core'
-import { SwapRouter, UNIVERSAL_ROUTER_ADDRESS } from '@uniswap/universal-router-sdk'
+import { SwapRouter } from '@uniswap/universal-router-sdk'
 import { FeeOptions, toHex } from '@uniswap/v3-sdk'
 import { useWeb3React } from '@web3-react/core'
 import { formatSwapSignedAnalyticsEventProperties } from 'lib/utils/analytics'
@@ -14,6 +14,7 @@ import { trace } from 'tracing'
 import { calculateGasMargin } from 'utils/calculateGasMargin'
 import isZero from 'utils/isZero'
 import { didUserReject, swapErrorToUserReadableMessage } from 'utils/swapErrorToUserReadableMessage'
+import { UNIVERSAL_ROUTER_ADDRESS } from 'utils/zksync'
 
 import { PermitSignature } from './usePermitAllowance'
 
@@ -69,7 +70,7 @@ export function useUniversalRouterSwapCallback(
           })
           const tx = {
             from: account,
-            to: UNIVERSAL_ROUTER_ADDRESS(chainId),
+            to: UNIVERSAL_ROUTER_ADDRESS, //UNIVERSAL_ROUTER_ADDRESS(chainId),
             data,
             // TODO(https://github.com/Uniswap/universal-router-sdk/issues/113): universal-router-sdk returns a non-hexlified value.
             ...(value && !isZero(value) ? { value: toHex(value) } : {}),

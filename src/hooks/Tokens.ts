@@ -1,6 +1,5 @@
 import { Currency, Token } from '@uniswap/sdk-core'
 import { useWeb3React } from '@web3-react/core'
-import { getChainInfo } from 'constants/chainInfo'
 import { SupportedChainId } from 'constants/chains'
 import { DEFAULT_INACTIVE_LIST_URLS, DEFAULT_LIST_OF_LISTS } from 'constants/lists'
 import { useCurrencyFromMap, useTokenFromMapOrNetwork } from 'lib/hooks/useCurrency'
@@ -78,29 +77,31 @@ export function useUnsupportedTokens(): { [address: string]: Token } {
       return {}
     }
 
-    const listUrl = getChainInfo(chainId).defaultListUrl
+    return {}
 
-    const { current: list } = listsByUrl[listUrl]
-    if (!list) {
-      return {}
-    }
+    // const listUrl = getChainInfo(chainId).defaultListUrl
 
-    const unsupportedSet = new Set(Object.keys(unsupportedTokens))
+    // const { current: list } = listsByUrl[listUrl]
+    // if (!list) {
+    //   return {}
+    // }
 
-    return list.tokens.reduce((acc, tokenInfo) => {
-      const bridgeInfo = tokenInfo.extensions?.bridgeInfo as unknown as BridgeInfo
-      if (
-        bridgeInfo &&
-        bridgeInfo[SupportedChainId.MAINNET] &&
-        bridgeInfo[SupportedChainId.MAINNET].tokenAddress &&
-        unsupportedSet.has(bridgeInfo[SupportedChainId.MAINNET].tokenAddress)
-      ) {
-        const address = bridgeInfo[SupportedChainId.MAINNET].tokenAddress
-        // don't rely on decimals--it's possible that a token could be bridged w/ different decimals on the L2
-        return { ...acc, [address]: new Token(SupportedChainId.MAINNET, address, tokenInfo.decimals) }
-      }
-      return acc
-    }, {})
+    // const unsupportedSet = new Set(Object.keys(unsupportedTokens))
+
+    // return list.tokens.reduce((acc, tokenInfo) => {
+    //   const bridgeInfo = tokenInfo.extensions?.bridgeInfo as unknown as BridgeInfo
+    //   if (
+    //     bridgeInfo &&
+    //     bridgeInfo[SupportedChainId.MAINNET] &&
+    //     bridgeInfo[SupportedChainId.MAINNET].tokenAddress &&
+    //     unsupportedSet.has(bridgeInfo[SupportedChainId.MAINNET].tokenAddress)
+    //   ) {
+    //     const address = bridgeInfo[SupportedChainId.MAINNET].tokenAddress
+    //     // don't rely on decimals--it's possible that a token could be bridged w/ different decimals on the L2
+    //     return { ...acc, [address]: new Token(SupportedChainId.MAINNET, address, tokenInfo.decimals) }
+    //   }
+    //   return acc
+    // }, {})
   }, [chainId, listsByUrl, unsupportedTokens])
 
   return { ...unsupportedTokens, ...l2InferredBlockedTokens }

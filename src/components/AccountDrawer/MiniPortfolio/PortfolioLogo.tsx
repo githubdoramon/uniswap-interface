@@ -1,11 +1,9 @@
 import { Currency } from '@uniswap/sdk-core'
-import blankTokenUrl from 'assets/svg/blank_token.svg'
 import { ReactComponent as UnknownStatus } from 'assets/svg/contract-interaction.svg'
 import { LogoImage, MissingImageLogo } from 'components/Logo/AssetLogo'
 import { Unicon } from 'components/Unicon'
 import { getChainInfo } from 'constants/chainInfo'
 import { SupportedChainId } from 'constants/chains'
-import useTokenLogoSource from 'hooks/useAssetLogoSource'
 import useENSAvatar from 'hooks/useENSAvatar'
 import React from 'react'
 import { Loader } from 'react-feather'
@@ -85,7 +83,7 @@ const L2LogoContainer = styled.div<{ $backgroundColor?: string }>`
  * Renders an image by prioritizing a list of sources, and then eventually a fallback triangle alert
  */
 export function PortfolioLogo({
-  chainId = SupportedChainId.MAINNET,
+  chainId = SupportedChainId.ZKSYNC_ERA,
   accountAddress,
   currencies,
   images,
@@ -97,8 +95,8 @@ export function PortfolioLogo({
   const { avatar, loading } = useENSAvatar(accountAddress, false)
   const theme = useTheme()
 
-  const [src, nextSrc] = useTokenLogoSource(currencies?.[0]?.wrapped.address, chainId, currencies?.[0]?.isNative)
-  const [src2, nextSrc2] = useTokenLogoSource(currencies?.[1]?.wrapped.address, chainId, currencies?.[1]?.isNative)
+  // const [src, nextSrc] = useTokenLogoSource(currencies?.[0]?.wrapped.address, chainId, currencies?.[0]?.isNative)
+  // const [src2, nextSrc2] = useTokenLogoSource(currencies?.[1]?.wrapped.address, chainId, currencies?.[1]?.isNative)
 
   let component
   if (accountAddress) {
@@ -110,23 +108,24 @@ export function PortfolioLogo({
       <Unicon size={40} address={accountAddress} />
     )
   } else if (currencies && currencies.length) {
-    const logo1 = <LogoImage size={size} src={src ?? blankTokenUrl} onError={nextSrc} />
+    // const logo1 = <LogoImage size={size} src={src ?? blankTokenUrl} onError={nextSrc} />
 
-    const logo2 = <LogoImage size={size} src={src2 ?? blankTokenUrl} onError={nextSrc2} />
+    // const logo2 = <LogoImage size={size} src={src2 ?? blankTokenUrl} onError={nextSrc2} />
 
-    component =
-      currencies.length > 1 ? (
-        <DoubleLogoContainer style={style}>
-          {logo1}
-          {logo2}
-        </DoubleLogoContainer>
-      ) : src ? (
-        logo1
-      ) : (
-        <MissingImageLogo size={size}>
-          {currencies[0]?.symbol?.toUpperCase().replace('$', '').replace(/\s+/g, '').slice(0, 3)}
-        </MissingImageLogo>
-      )
+    component = (
+      // currencies.length > 1 ? (
+      //   <DoubleLogoContainer style={style}>
+      //     {logo1}
+      //     {logo2}
+      //   </DoubleLogoContainer>
+      // ) : src ? (
+      //   logo1
+      // ) : (
+      <MissingImageLogo size={size}>
+        {currencies[0]?.symbol?.toUpperCase().replace('$', '').replace(/\s+/g, '').slice(0, 3)}
+      </MissingImageLogo>
+    )
+    // )
   } else if (images && images.length) {
     component =
       images.length > 1 ? (
