@@ -1,13 +1,10 @@
 import { BigintIsh, CurrencyAmount, Token, TradeType } from '@uniswap/sdk-core'
+import { AlphaRouterConfig } from '@uniswap/smart-order-router'
 import { SupportedChainId } from 'constants/chains'
 import JSBI from 'jsbi'
+import { AlphaRouter, ChainId } from 'router_module'
 import { GetQuoteResult } from 'state/routing/types'
 import { transformSwapRouteToGetQuoteResult } from 'utils/transformSwapRouteToGetQuoteResult'
-
-// This file is lazy-loaded, so the import of smart-order-router is intentional.
-// eslint-disable-next-line no-restricted-imports
-import { AlphaRouter, AlphaRouterConfig } from '../../../router_module/routers'
-import { ChainId } from '../../../router_module/util'
 
 export function toSupportedChainId(chainId: ChainId): SupportedChainId | undefined {
   const numericChainId: number = chainId

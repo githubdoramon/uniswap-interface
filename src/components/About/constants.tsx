@@ -10,7 +10,7 @@ import darkTerminalImgSrc from './images/aboutTerminalDark.png'
 import nftCardImgSrc from './images/nftCard.png'
 import swapCardImgSrc from './images/swapCard.png'
 
-export const MAIN_CARDS = [
+const MAIN_CARDS = [
   {
     to: '/swap',
     title: 'Swap tokens',
@@ -38,7 +38,7 @@ const StyledCardLogo = styled.img`
   max-width: 48px;
 `
 
-export const MORE_CARDS = [
+const MORE_CARDS = [
   {
     to: 'https://support.uniswap.org/hc/en-us/articles/11306574799117-How-to-use-Moon-Pay-on-the-Uniswap-web-app-',
     external: true,

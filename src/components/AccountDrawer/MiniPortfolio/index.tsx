@@ -1,9 +1,8 @@
 import { Trans } from '@lingui/macro'
-import { Trace, TraceEvent } from '@uniswap/analytics'
-import { BrowserEvent, InterfaceElementName, InterfaceSectionName, SharedEventName } from '@uniswap/analytics-events'
+import { TraceEvent } from '@uniswap/analytics'
+import { BrowserEvent, InterfaceElementName, SharedEventName } from '@uniswap/analytics-events'
 import Column from 'components/Column'
 import { AutoRow } from 'components/Row'
-import { useMiniPortfolioEnabled } from 'featureFlags/flags/miniPortfolio'
 import { useIsNftPage } from 'hooks/useIsNftPage'
 import { useAtomValue } from 'jotai/utils'
 import { useState } from 'react'
@@ -124,13 +123,13 @@ function MiniPortfolio({ account }: { account: string }) {
   )
 }
 
-export default function MiniPortfolioWrapper({ account }: { account: string }) {
-  const flagEnabled = useMiniPortfolioEnabled()
-  if (!flagEnabled) return null
+// export default function MiniPortfolioWrapper({ account }: { account: string }) {
+//   const flagEnabled = useMiniPortfolioEnabled()
+//   if (!flagEnabled) return null
 
-  return (
-    <Trace section={InterfaceSectionName.MINI_PORTFOLIO}>
-      <MiniPortfolio account={account} />
-    </Trace>
-  )
-}
+//   return (
+//     <Trace section={InterfaceSectionName.MINI_PORTFOLIO}>
+//       <MiniPortfolio account={account} />
+//     </Trace>
+//   )
+// }

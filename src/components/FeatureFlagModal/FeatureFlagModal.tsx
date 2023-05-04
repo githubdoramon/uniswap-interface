@@ -193,7 +193,7 @@ function FeatureFlagOption({ value, variant, featureFlag, label }: FeatureFlagPr
   )
 }
 
-export default function FeatureFlagModal() {
+function FeatureFlagModal() {
   const open = useModalIsOpen(ApplicationModal.FEATURE_FLAGS)
   const toggle = useToggleFeatureFlags()
 

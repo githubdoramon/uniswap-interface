@@ -1,12 +1,12 @@
 import { skipToken } from '@reduxjs/toolkit/query/react'
 import { Currency, CurrencyAmount, TradeType } from '@uniswap/sdk-core'
-import { IMetric, MetricLoggerUnit, setGlobalMetric } from '@uniswap/smart-order-router'
 import { sendTiming } from 'components/analytics'
 import { AVERAGE_L1_BLOCK_TIME } from 'constants/chainInfo'
 import { useStablecoinAmountFromFiatValue } from 'hooks/useStablecoinPrice'
 import { useRoutingAPIArguments } from 'lib/hooks/routing/useRoutingAPIArguments'
 import ms from 'ms.macro'
 import { useMemo } from 'react'
+import { IMetric, MetricLoggerUnit, setGlobalMetric } from 'router_module'
 import { RouterPreference, useGetQuoteQuery } from 'state/routing/slice'
 
 import { InterfaceTrade, TradeState } from './types'
@@ -131,6 +131,10 @@ class GAMetric extends IMetric {
 
   putMetric(key: string, value: number, unit?: MetricLoggerUnit) {
     sendTiming('Routing API', `${key} | ${unit}`, value, 'client')
+  }
+
+  setProperty(key: string, value: unknown): void {
+    return
   }
 }
 

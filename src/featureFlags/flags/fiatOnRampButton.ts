@@ -4,6 +4,6 @@ function useFiatOnRampButtonFlag(): BaseVariant {
   return useBaseFlag(FeatureFlag.fiatOnRampButtonOnSwap)
 }
 
-export function useFiatOnRampButtonEnabled(): boolean {
-  return useFiatOnRampButtonFlag() === BaseVariant.Enabled
-}
+// export function useFiatOnRampButtonEnabled(): boolean {
+//   return useFiatOnRampButtonFlag() === BaseVariant.Enabled
+// }

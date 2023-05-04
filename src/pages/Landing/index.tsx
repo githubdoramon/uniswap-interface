@@ -1,24 +1,9 @@
-import { Trans } from '@lingui/macro'
-import { Trace, TraceEvent } from '@uniswap/analytics'
-import { BrowserEvent, InterfaceElementName, InterfacePageName, SharedEventName } from '@uniswap/analytics-events'
-import { AboutFooter } from 'components/About/AboutFooter'
-import Card, { CardType } from 'components/About/Card'
-import { MAIN_CARDS, MORE_CARDS } from 'components/About/constants'
-import ProtocolBanner from 'components/About/ProtocolBanner'
 import { BaseButton } from 'components/Button'
-import { useSwapWidgetEnabled } from 'featureFlags/flags/swapWidget'
-import { useAtomValue } from 'jotai/utils'
 import Swap from 'pages/Swap'
-import { parse } from 'qs'
-import { useEffect, useRef, useState } from 'react'
 import { ArrowDownCircle } from 'react-feather'
-import { useLocation, useNavigate } from 'react-router-dom'
 import { Link as NativeLink } from 'react-router-dom'
-import { shouldDisableNFTRoutesAtom } from 'state/application/atoms'
-import { useAppSelector } from 'state/hooks'
 import styled, { css } from 'styled-components/macro'
 import { BREAKPOINTS } from 'theme'
-import { useIsDarkMode } from 'theme/components/ThemeToggle'
 import { Z_INDEX } from 'theme/zIndex'
 
 const PageContainer = styled.div<{ isDarkMode: boolean }>`
@@ -294,114 +279,114 @@ const WidgetLandingLink = styled(NativeLink)`
   ${SwapCss}
 `
 
-export default function Landing() {
-  const isDarkMode = useIsDarkMode()
+// export default function Landing() {
+//   const isDarkMode = useIsDarkMode()
 
-  const cardsRef = useRef<HTMLDivElement>(null)
+//   const cardsRef = useRef<HTMLDivElement>(null)
 
-  const [showContent, setShowContent] = useState(false)
-  const selectedWallet = useAppSelector((state) => state.user.selectedWallet)
-  const navigate = useNavigate()
-  const location = useLocation()
-  const queryParams = parse(location.search, {
-    ignoreQueryPrefix: true,
-  })
+//   const [showContent, setShowContent] = useState(false)
+//   const selectedWallet = useAppSelector((state) => state.user.selectedWallet)
+//   const navigate = useNavigate()
+//   const location = useLocation()
+//   const queryParams = parse(location.search, {
+//     ignoreQueryPrefix: true,
+//   })
 
-  const swapWidgetEnabled = useSwapWidgetEnabled()
+//   const swapWidgetEnabled = useSwapWidgetEnabled()
 
-  // This can be simplified significantly once the flag is removed! For now being explicit is clearer.
-  useEffect(() => {
-    if (queryParams.intro || !selectedWallet) {
-      setShowContent(true)
-    } else {
-      navigate('/swap')
-    }
-  }, [navigate, selectedWallet, queryParams.intro])
+//   // This can be simplified significantly once the flag is removed! For now being explicit is clearer.
+//   useEffect(() => {
+//     if (queryParams.intro || !selectedWallet) {
+//       setShowContent(true)
+//     } else {
+//       navigate('/swap')
+//     }
+//   }, [navigate, selectedWallet, queryParams.intro])
 
-  const shouldDisableNFTRoutes = useAtomValue(shouldDisableNFTRoutesAtom)
+//   const shouldDisableNFTRoutes = useAtomValue(shouldDisableNFTRoutesAtom)
 
-  return (
-    <Trace page={InterfacePageName.LANDING_PAGE} shouldLogImpression>
-      {showContent && (
-        <PageContainer isDarkMode={isDarkMode} data-testid="landing-page">
-          <LandingSwapContainer>
-            <TraceEvent
-              events={[BrowserEvent.onClick]}
-              name={SharedEventName.ELEMENT_CLICKED}
-              element={InterfaceElementName.LANDING_PAGE_SWAP_ELEMENT}
-            >
-              {swapWidgetEnabled ? (
-                <WidgetLandingLink to="/swap">
-                  <Swap />
-                </WidgetLandingLink>
-              ) : (
-                <Link to="/swap">
-                  <LandingSwap />
-                </Link>
-              )}
-            </TraceEvent>
-          </LandingSwapContainer>
-          <Gradient isDarkMode={isDarkMode} />
-          <GlowContainer>
-            <Glow />
-          </GlowContainer>
-          <ContentContainer isDarkMode={isDarkMode}>
-            <TitleText isDarkMode={isDarkMode}>
-              {shouldDisableNFTRoutes ? (
-                <Trans>Trade crypto with confidence</Trans>
-              ) : (
-                <Trans>Trade crypto and NFTs with confidence</Trans>
-              )}
-            </TitleText>
-            <SubTextContainer>
-              <SubText>
-                {shouldDisableNFTRoutes ? (
-                  <Trans>Buy, sell, and explore tokens</Trans>
-                ) : (
-                  <Trans>Buy, sell, and explore tokens and NFTs</Trans>
-                )}
-              </SubText>
-            </SubTextContainer>
-            <ActionsContainer>
-              <TraceEvent
-                events={[BrowserEvent.onClick]}
-                name={SharedEventName.ELEMENT_CLICKED}
-                element={InterfaceElementName.CONTINUE_BUTTON}
-              >
-                <ButtonCTA as={Link} to="/swap">
-                  <ButtonCTAText>Get started</ButtonCTAText>
-                </ButtonCTA>
-              </TraceEvent>
-            </ActionsContainer>
-            <LearnMoreContainer
-              onClick={() => {
-                cardsRef?.current?.scrollIntoView({ behavior: 'smooth' })
-              }}
-            >
-              <Trans>Learn more</Trans>
-              <LearnMoreArrow />
-            </LearnMoreContainer>
-          </ContentContainer>
-          <AboutContentContainer isDarkMode={isDarkMode}>
-            <CardGrid cols={2} ref={cardsRef}>
-              {MAIN_CARDS.map(({ darkBackgroundImgSrc, lightBackgroundImgSrc, ...card }) => (
-                <Card
-                  {...card}
-                  backgroundImgSrc={isDarkMode ? darkBackgroundImgSrc : lightBackgroundImgSrc}
-                  key={card.title}
-                />
-              ))}
-            </CardGrid>
-            <CardGrid cols={3}>
-              {MORE_CARDS.map(({ darkIcon, lightIcon, ...card }) => (
-                <Card {...card} icon={isDarkMode ? darkIcon : lightIcon} key={card.title} type={CardType.Secondary} />
-              ))}
-            </CardGrid>
-            <ProtocolBanner />
-            <AboutFooter />
-          </AboutContentContainer>
-        </PageContainer>
-      )}
-    </Trace>
-  )
-}
+//   return (
+//     <Trace page={InterfacePageName.LANDING_PAGE} shouldLogImpression>
+//       {showContent && (
+//         <PageContainer isDarkMode={isDarkMode} data-testid="landing-page">
+//           <LandingSwapContainer>
+//             <TraceEvent
+//               events={[BrowserEvent.onClick]}
+//               name={SharedEventName.ELEMENT_CLICKED}
+//               element={InterfaceElementName.LANDING_PAGE_SWAP_ELEMENT}
+//             >
+//               {swapWidgetEnabled ? (
+//                 <WidgetLandingLink to="/swap">
+//                   <Swap />
+//                 </WidgetLandingLink>
+//               ) : (
+//                 <Link to="/swap">
+//                   <LandingSwap />
+//                 </Link>
+//               )}
+//             </TraceEvent>
+//           </LandingSwapContainer>
+//           <Gradient isDarkMode={isDarkMode} />
+//           <GlowContainer>
+//             <Glow />
+//           </GlowContainer>
+//           <ContentContainer isDarkMode={isDarkMode}>
+//             <TitleText isDarkMode={isDarkMode}>
+//               {shouldDisableNFTRoutes ? (
+//                 <Trans>Trade crypto with confidence</Trans>
+//               ) : (
+//                 <Trans>Trade crypto and NFTs with confidence</Trans>
+//               )}
+//             </TitleText>
+//             <SubTextContainer>
+//               <SubText>
+//                 {shouldDisableNFTRoutes ? (
+//                   <Trans>Buy, sell, and explore tokens</Trans>
+//                 ) : (
+//                   <Trans>Buy, sell, and explore tokens and NFTs</Trans>
+//                 )}
+//               </SubText>
+//             </SubTextContainer>
+//             <ActionsContainer>
+//               <TraceEvent
+//                 events={[BrowserEvent.onClick]}
+//                 name={SharedEventName.ELEMENT_CLICKED}
+//                 element={InterfaceElementName.CONTINUE_BUTTON}
+//               >
+//                 <ButtonCTA as={Link} to="/swap">
+//                   <ButtonCTAText>Get started</ButtonCTAText>
+//                 </ButtonCTA>
+//               </TraceEvent>
+//             </ActionsContainer>
+//             <LearnMoreContainer
+//               onClick={() => {
+//                 cardsRef?.current?.scrollIntoView({ behavior: 'smooth' })
+//               }}
+//             >
+//               <Trans>Learn more</Trans>
+//               <LearnMoreArrow />
+//             </LearnMoreContainer>
+//           </ContentContainer>
+//           <AboutContentContainer isDarkMode={isDarkMode}>
+//             <CardGrid cols={2} ref={cardsRef}>
+//               {MAIN_CARDS.map(({ darkBackgroundImgSrc, lightBackgroundImgSrc, ...card }) => (
+//                 <Card
+//                   {...card}
+//                   backgroundImgSrc={isDarkMode ? darkBackgroundImgSrc : lightBackgroundImgSrc}
+//                   key={card.title}
+//                 />
+//               ))}
+//             </CardGrid>
+//             <CardGrid cols={3}>
+//               {MORE_CARDS.map(({ darkIcon, lightIcon, ...card }) => (
+//                 <Card {...card} icon={isDarkMode ? darkIcon : lightIcon} key={card.title} type={CardType.Secondary} />
+//               ))}
+//             </CardGrid>
+//             <ProtocolBanner />
+//             <AboutFooter />
+//           </AboutContentContainer>
+//         </PageContainer>
+//       )}
+//     </Trace>
+//   )
+// }

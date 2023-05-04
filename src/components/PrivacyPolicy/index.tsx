@@ -79,7 +79,7 @@ const EXTERNAL_APIS = [
   },
 ]
 
-export function PrivacyPolicyModal() {
+function PrivacyPolicyModal() {
   const node = useRef<HTMLDivElement>()
   const open = useModalIsOpen(ApplicationModal.PRIVACY_POLICY)
   const toggle = useTogglePrivacyPolicy()

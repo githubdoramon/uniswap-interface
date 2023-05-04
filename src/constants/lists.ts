@@ -12,9 +12,9 @@ const KLEROS_LIST = 't2crtokens.eth'
 const SET_LIST = 'https://raw.githubusercontent.com/SetProtocol/uniswap-tokenlist/main/set.tokenlist.json'
 const WRAPPED_LIST = 'wrapped.tokensoft.eth'
 
-export const OPTIMISM_LIST = 'https://static.optimism.io/optimism.tokenlist.json'
-export const ARBITRUM_LIST = 'https://bridge.arbitrum.io/token-list-42161.json'
-export const CELO_LIST = 'https://celo-org.github.io/celo-token-list/celo.tokenlist.json'
+// export const OPTIMISM_LIST = 'https://static.optimism.io/optimism.tokenlist.json'
+// export const ARBITRUM_LIST = 'https://bridge.arbitrum.io/token-list-42161.json'
+// export const CELO_LIST = 'https://celo-org.github.io/celo-token-list/celo.tokenlist.json'
 export const PLASMA_BNB_LIST = 'https://raw.githubusercontent.com/plasmadlt/plasma-finance-token-list/master/bnb.json'
 export const ZKSYNC_ERA_LIST =
   'https://era.zksync.io/docs/dev/building-on-zksync/useful-address.html#mainnet-known-tokens/'
@@ -34,9 +34,9 @@ export const DEFAULT_INACTIVE_LIST_URLS: string[] = [
   GEMINI_LIST,
   WRAPPED_LIST,
   SET_LIST,
-  ARBITRUM_LIST,
-  OPTIMISM_LIST,
-  CELO_LIST,
+  // ARBITRUM_LIST,
+  // OPTIMISM_LIST,
+  // CELO_LIST,
   PLASMA_BNB_LIST,
   ...UNSUPPORTED_LIST_URLS,
 ]

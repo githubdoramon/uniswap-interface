@@ -67,7 +67,7 @@ export const VerifiedIcon = (props: SVGProps) => {
   )
 }
 
-export const PoolIcon = ({ width, height, ...props }: SVGProps) => (
+const PoolIcon = ({ width, height, ...props }: SVGProps) => (
   <svg
     width={width}
     height={height}
@@ -390,7 +390,7 @@ export const TagIcon = (props: SVGProps) => (
   </svg>
 )
 
-export const BarChartIcon = (props: SVGProps) => (
+const BarChartIcon = (props: SVGProps) => (
   <svg fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
     <path d="M12 20V10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     <path d="M6 20V4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -418,7 +418,7 @@ export const TwitterIcon = (props: SVGProps) => (
   </svg>
 )
 
-export const DiscordIconMenu = (props: SVGProps) => (
+const DiscordIconMenu = (props: SVGProps) => (
   <svg fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
     <path
       d="M17.0325 6.95914C16.0748 6.51107 15.0508 6.18542 13.9802 6C13.8487 6.23771 13.6951 6.55743 13.5892 6.81177C12.4512 6.64062 11.3236 6.64062 10.2065 6.81177C10.1006 6.55743 9.94354 6.23771 9.81089 6C8.73916 6.18542 7.71399 6.51226 6.7563 6.96152C4.82465 9.8805 4.30101 12.727 4.56283 15.5331C5.844 16.4898 7.08562 17.071 8.30628 17.4513C8.60767 17.0365 8.87646 16.5956 9.10803 16.1309C8.66701 15.9633 8.24461 15.7565 7.84549 15.5164C7.95137 15.438 8.05494 15.356 8.15501 15.2716C10.5894 16.4102 13.2343 16.4102 15.6396 15.2716C15.7408 15.356 15.8444 15.438 15.9491 15.5164C15.5488 15.7577 15.1253 15.9645 14.6842 16.1321C14.9158 16.5956 15.1834 17.0377 15.486 17.4525C16.7078 17.0722 17.9506 16.491 19.2318 15.5331C19.539 12.2801 18.707 9.45977 17.0325 6.95914ZM9.43967 13.8074C8.70891 13.8074 8.10962 13.1251 8.10962 12.2944C8.10962 11.4636 8.69611 10.7802 9.43967 10.7802C10.1833 10.7802 10.7825 11.4624 10.7697 12.2944C10.7709 13.1251 10.1833 13.8074 9.43967 13.8074ZM14.3549 13.8074C13.6242 13.8074 13.0249 13.1251 13.0249 12.2944C13.0249 11.4636 13.6113 10.7802 14.3549 10.7802C15.0985 10.7802 15.6978 11.4624 15.685 12.2944C15.685 13.1251 15.0985 13.8074 14.3549 13.8074Z"
@@ -427,7 +427,7 @@ export const DiscordIconMenu = (props: SVGProps) => (
   </svg>
 )
 
-export const TwitterIconMenu = (props: SVGProps) => (
+const TwitterIconMenu = (props: SVGProps) => (
   <svg fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
     <path
       d="M18.955 7.34849C18.4393 7.57725 17.885 7.73179 17.3033 7.80132C17.897 7.44542 18.3531 6.88184 18.5678 6.21026C18.012 6.53989 17.3966 6.77916 16.7415 6.90812C16.217 6.34918 15.4695 6 14.6424 6C13.0542 6 11.7665 7.28758 11.7665 8.87576C11.7665 9.10117 11.7919 9.32068 11.841 9.53116C9.45084 9.41124 7.33181 8.26628 5.91338 6.52636C5.66583 6.95109 5.52397 7.44507 5.52397 7.97213C5.52397 8.96989 6.03168 9.85012 6.80335 10.3658C6.33194 10.3509 5.8885 10.2215 5.50077 10.0061C5.50044 10.0181 5.50044 10.0302 5.50044 10.0423C5.50044 11.4356 6.49176 12.5979 7.80738 12.8623C7.56607 12.928 7.312 12.9631 7.04973 12.9631C6.86442 12.9631 6.6843 12.9451 6.50866 12.9116C6.87465 14.054 7.93669 14.8855 9.19518 14.9086C8.21094 15.68 6.97095 16.1398 5.62352 16.1398C5.39139 16.1398 5.16248 16.1261 4.9375 16.0996C6.21022 16.9156 7.72187 17.3917 9.34594 17.3917C14.6357 17.3917 17.5284 13.0096 17.5284 9.20917C17.5284 9.08449 17.5256 8.9605 17.52 8.83708C18.0819 8.43169 18.5694 7.92524 18.955 7.34849H18.955Z"
@@ -436,7 +436,7 @@ export const TwitterIconMenu = (props: SVGProps) => (
   </svg>
 )
 
-export const GithubIconMenu = (props: SVGProps) => (
+const GithubIconMenu = (props: SVGProps) => (
   <svg fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
     <path
       fillRule="evenodd"
@@ -459,7 +459,7 @@ export const CheckMarkIcon = (props: SVGProps) => (
   </svg>
 )
 
-export const GovernanceIcon = (props: SVGProps) => (
+const GovernanceIcon = (props: SVGProps) => (
   <svg fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
     <path
       d="M18.75 16.5V6.00002C18.7512 5.7042 18.6939 5.41106 18.5813 5.13752C18.4686 4.86397 18.3029 4.61544 18.0938 4.40626C17.8846 4.19708 17.636 4.0314 17.3625 3.91876C17.089 3.80613 16.7958 3.74878 16.5 3.75002H3.75"

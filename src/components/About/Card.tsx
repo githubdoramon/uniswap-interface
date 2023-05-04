@@ -5,7 +5,7 @@ import styled, { DefaultTheme } from 'styled-components/macro'
 import { BREAKPOINTS } from 'theme'
 import { useIsDarkMode } from 'theme/components/ThemeToggle'
 
-export enum CardType {
+enum CardType {
   Primary = 'Primary',
   Secondary = 'Secondary',
 }
@@ -147,4 +147,4 @@ const Card = ({
   )
 }
 
-export default Card
+// export default Card

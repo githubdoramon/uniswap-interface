@@ -136,7 +136,7 @@ const LogoSectionContent = () => {
   )
 }
 
-export const AboutFooter = () => {
+const AboutFooter = () => {
   return (
     <Footer>
       <LogoSectionLeft>
