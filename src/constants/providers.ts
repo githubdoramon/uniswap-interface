@@ -69,4 +69,6 @@ export const RPC_PROVIDERS: { [key in SupportedChainId]: StaticJsonRpcProvider }
   [SupportedChainId.CELO]: new AppJsonRpcProvider(SupportedChainId.CELO),
   [SupportedChainId.CELO_ALFAJORES]: new AppJsonRpcProvider(SupportedChainId.CELO_ALFAJORES),
   [SupportedChainId.BNB]: new AppJsonRpcProvider(SupportedChainId.BNB),
+  [SupportedChainId.ZKSYNC_ERA]: new AppJsonRpcProvider(SupportedChainId.ZKSYNC_ERA),
+  [SupportedChainId.ZKSYNC_ERA_TESTNET]: new AppJsonRpcProvider(SupportedChainId.ZKSYNC_ERA_TESTNET),
 }

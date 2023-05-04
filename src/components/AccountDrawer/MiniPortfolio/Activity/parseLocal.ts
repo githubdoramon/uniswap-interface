@@ -161,6 +161,7 @@ export function parseLocalActivity(
 
     let additionalFields: Partial<Activity> = {}
     const info = details.info
+
     if (info.type === TransactionType.SWAP) {
       additionalFields = parseSwap(info, chainId, tokens)
     } else if (info.type === TransactionType.APPROVAL) {

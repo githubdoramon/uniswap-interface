@@ -31,7 +31,6 @@ import DarkModeQueryParamReader from '../theme/components/DarkModeQueryParamRead
 import AddLiquidity from './AddLiquidity'
 import { RedirectDuplicateTokenIds } from './AddLiquidity/redirects'
 import { RedirectDuplicateTokenIdsV2 } from './AddLiquidityV2/redirects'
-import Landing from './Landing'
 import MigrateV2 from './MigrateV2'
 import MigrateV2Pair from './MigrateV2/MigrateV2Pair'
 import NotFound from './NotFound'
@@ -43,7 +42,6 @@ import RemoveLiquidity from './RemoveLiquidity'
 import RemoveLiquidityV3 from './RemoveLiquidity/V3'
 import Swap from './Swap'
 import { RedirectPathToSwapOnly } from './Swap/redirects'
-import Tokens from './Tokens'
 
 const TokenDetails = lazy(() => import('./TokenDetails'))
 const Vote = lazy(() => import('./Vote'))
@@ -96,21 +94,21 @@ function getCurrentPageFromLocation(locationPathname: string): InterfacePageName
   switch (true) {
     case locationPathname.startsWith('/swap'):
       return InterfacePageName.SWAP_PAGE
-    case locationPathname.startsWith('/vote'):
-      return InterfacePageName.VOTE_PAGE
+    // case locationPathname.startsWith('/vote'):
+    //   return InterfacePageName.VOTE_PAGE
     case locationPathname.startsWith('/pools'):
     case locationPathname.startsWith('/pool'):
       return InterfacePageName.POOL_PAGE
-    case locationPathname.startsWith('/tokens'):
-      return InterfacePageName.TOKENS_PAGE
-    case locationPathname.startsWith('/nfts/profile'):
-      return InterfacePageName.NFT_PROFILE_PAGE
-    case locationPathname.startsWith('/nfts/asset'):
-      return InterfacePageName.NFT_DETAILS_PAGE
-    case locationPathname.startsWith('/nfts/collection'):
-      return InterfacePageName.NFT_COLLECTION_PAGE
-    case locationPathname.startsWith('/nfts'):
-      return InterfacePageName.NFT_EXPLORE_PAGE
+    // case locationPathname.startsWith('/tokens'):
+    //   return InterfacePageName.TOKENS_PAGE
+    // case locationPathname.startsWith('/nfts/profile'):
+    //   return InterfacePageName.NFT_PROFILE_PAGE
+    // case locationPathname.startsWith('/nfts/asset'):
+    //   return InterfacePageName.NFT_DETAILS_PAGE
+    // case locationPathname.startsWith('/nfts/collection'):
+    //   return InterfacePageName.NFT_COLLECTION_PAGE
+    // case locationPathname.startsWith('/nfts'):
+    //   return InterfacePageName.NFT_EXPLORE_PAGE
     default:
       return undefined
   }
@@ -226,7 +224,9 @@ export default function App() {
             <Suspense fallback={<Loader />}>
               {isLoaded ? (
                 <Routes>
-                  <Route path="/" element={<Landing />} />
+                  <Route path="/" element={<RedirectPathToSwapOnly />} />
+
+                  {/* <Route path="/" element={<Landing />} />
 
                   <Route path="tokens" element={<Tokens />}>
                     <Route path=":chainName" />
@@ -240,7 +240,7 @@ export default function App() {
                       </Suspense>
                     }
                   />
-                  <Route path="create-proposal" element={<Navigate to="/vote/create-proposal" replace />} />
+                  <Route path="create-proposal" element={<Navigate to="/vote/create-proposal" replace />} /> */}
                   <Route path="send" element={<RedirectPathToSwapOnly />} />
                   <Route path="swap" element={<Swap />} />
 
@@ -259,7 +259,7 @@ export default function App() {
                     <Route path=":currencyIdA/:currencyIdB" />
                   </Route>
                   <Route path="add" element={<RedirectDuplicateTokenIds />}>
-                    {/* this is workaround since react-router-dom v6 doesn't support optional parameters any more */}
+                    this is workaround since react-router-dom v6 doesn't support optional parameters any more
                     <Route path=":currencyIdA" />
                     <Route path=":currencyIdA/:currencyIdB" />
                     <Route path=":currencyIdA/:currencyIdB/:feeAmount" />
@@ -278,7 +278,7 @@ export default function App() {
                   <Route path="migrate/v2" element={<MigrateV2 />} />
                   <Route path="migrate/v2/:address" element={<MigrateV2Pair />} />
 
-                  {!shouldDisableNFTRoutes && (
+                  {false && (
                     <>
                       <Route
                         path="/nfts"

@@ -1,7 +1,6 @@
 import { t } from '@lingui/macro'
 import { useWeb3React } from '@web3-react/core'
 import { MouseoverTooltip } from 'components/Tooltip'
-import { ConnectionType } from 'connection'
 import { useGetConnection } from 'connection'
 import { getChainInfo } from 'constants/chainInfo'
 import { SupportedChainId } from 'constants/chains'
@@ -20,14 +19,7 @@ import * as styles from './ChainSelector.css'
 import ChainSelectorRow from './ChainSelectorRow'
 import { NavDropdown } from './NavDropdown'
 
-const NETWORK_SELECTOR_CHAINS = [
-  SupportedChainId.MAINNET,
-  SupportedChainId.POLYGON,
-  SupportedChainId.OPTIMISM,
-  SupportedChainId.ARBITRUM_ONE,
-  SupportedChainId.CELO,
-  SupportedChainId.BNB,
-]
+const NETWORK_SELECTOR_CHAINS = [SupportedChainId.ZKSYNC_ERA, SupportedChainId.ZKSYNC_ERA_TESTNET]
 
 interface ChainSelectorProps {
   leftAlign?: boolean
@@ -63,7 +55,6 @@ export const ChainSelector = ({ leftAlign }: ChainSelectorProps) => {
 
   const getConnection = useGetConnection()
   const connectionType = getConnection(connector).type
-  const isUniWallet = connectionType === ConnectionType.UNIWALLET
 
   if (!chainId) {
     return null
@@ -76,7 +67,6 @@ export const ChainSelector = ({ leftAlign }: ChainSelectorProps) => {
       <Column paddingX="8">
         {NETWORK_SELECTOR_CHAINS.map((chainId: SupportedChainId) => (
           <ChainSelectorRow
-            disabled={isUniWallet && chainId === SupportedChainId.CELO}
             onSelectChain={onSelectChain}
             targetChain={chainId}
             key={chainId}

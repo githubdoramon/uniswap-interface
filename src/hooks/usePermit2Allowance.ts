@@ -1,4 +1,3 @@
-import { PERMIT2_ADDRESS } from '@uniswap/permit2-sdk'
 import { CurrencyAmount, Token } from '@uniswap/sdk-core'
 import { useWeb3React } from '@web3-react/core'
 import { AVERAGE_L1_BLOCK_TIME } from 'constants/chainInfo'
@@ -7,6 +6,7 @@ import { useTokenAllowance, useUpdateTokenAllowance } from 'hooks/useTokenAllowa
 import useInterval from 'lib/hooks/useInterval'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useHasPendingApproval, useTransactionAdder } from 'state/transactions/hooks'
+import { PERMIT2_ADDRESS } from 'utils/zksync'
 
 enum ApprovalState {
   PENDING,
@@ -40,6 +40,7 @@ export default function usePermit2Allowance(amount?: CurrencyAmount<Token>, spen
   const token = amount?.currency
 
   const { tokenAllowance, isSyncing: isApprovalSyncing } = useTokenAllowance(token, account, PERMIT2_ADDRESS)
+
   const updateTokenAllowance = useUpdateTokenAllowance(amount, PERMIT2_ADDRESS)
   const isApproved = useMemo(() => {
     if (!amount || !tokenAllowance) return false

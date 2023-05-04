@@ -32,4 +32,9 @@ describe('#getExplorerLink', () => {
   it('goerli', () => {
     expect(getExplorerLink(5, 'abc', ExplorerDataType.ADDRESS)).toEqual('https://goerli.etherscan.io/address/abc')
   })
+  it('zksync era chain', () => {
+    expect(getExplorerLink(SupportedChainId.ZKSYNC_ERA, 'abc', ExplorerDataType.ADDRESS)).toEqual(
+      'https://explorer.zksync.io/address/abd'
+    )
+  })
 })

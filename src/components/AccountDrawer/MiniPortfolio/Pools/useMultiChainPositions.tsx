@@ -1,6 +1,6 @@
 import { CurrencyAmount, Token } from '@uniswap/sdk-core'
 import { abi as IUniswapV3PoolStateABI } from '@uniswap/v3-core/artifacts/contracts/interfaces/pool/IUniswapV3PoolState.sol/IUniswapV3PoolState.json'
-import { computePoolAddress, Pool, Position } from '@uniswap/v3-sdk'
+import { Pool, Position } from '@uniswap/v3-sdk'
 import { V3_CORE_FACTORY_ADDRESSES } from 'constants/addresses'
 import { SupportedChainId } from 'constants/chains'
 import { DEFAULT_ERC20_DECIMALS } from 'constants/tokens'
@@ -11,6 +11,7 @@ import { PositionDetails } from 'types/position'
 import { NonfungiblePositionManager, UniswapInterfaceMulticall } from 'types/v3'
 import { UniswapV3PoolInterface } from 'types/v3/UniswapV3Pool'
 import { currencyKey } from 'utils/currencyKey'
+import { computePoolAddress } from 'utils/zksync'
 
 import { PositionInfo, useCachedPositions, useGetCachedTokens, usePoolAddressCache } from './cache'
 import { Call, DEFAULT_GAS_LIMIT } from './getTokensAsync'
@@ -42,11 +43,12 @@ type FeeAmounts = [BigNumber, BigNumber]
 const MAX_UINT128 = BigNumber.from(2).pow(128).sub(1)
 
 const DEFAULT_CHAINS = [
-  SupportedChainId.MAINNET,
-  SupportedChainId.ARBITRUM_ONE,
-  SupportedChainId.OPTIMISM,
-  SupportedChainId.POLYGON,
-  SupportedChainId.CELO,
+  SupportedChainId.ZKSYNC_ERA,
+  SupportedChainId.ZKSYNC_ERA_TESTNET,
+  // SupportedChainId.ARBITRUM_ONE,
+  // SupportedChainId.OPTIMISM,
+  // SupportedChainId.POLYGON,
+  // SupportedChainId.CELO,
 ]
 
 type UseMultiChainPositionsData = { positions: PositionInfo[] | undefined; loading: boolean }
@@ -133,7 +135,7 @@ export default function useMultiChainPositions(account: string, chains = DEFAULT
         let poolAddress = poolAddressCache.get(details, chainId)
         if (!poolAddress) {
           const factoryAddress = V3_CORE_FACTORY_ADDRESSES[chainId]
-          poolAddress = computePoolAddress({ factoryAddress, tokenA, tokenB, fee: details.fee })
+          poolAddress = computePoolAddress(factoryAddress, [tokenA.address, tokenB.address], details.fee)
           poolAddressCache.set(details, chainId, poolAddress)
         }
         poolPairs.push([tokenA, tokenB])

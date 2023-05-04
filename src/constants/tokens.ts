@@ -354,6 +354,29 @@ export const BUSD_BSC = new Token(
 
 export const DAI_BSC = new Token(SupportedChainId.BNB, '0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3', 18, 'DAI', 'DAI')
 
+export const DAI_ZKSYNC_ERA = new Token(
+  SupportedChainId.ZKSYNC_ERA,
+  '0x4BEf76b6b7f2823C6c1f4FcfEACD85C24548ad7e',
+  18,
+  'DAI',
+  'Dai stable coin'
+)
+export const DAI_ZKSYNC_ERA_TESTNET = new Token(
+  SupportedChainId.ZKSYNC_ERA_TESTNET,
+  '0x3e7676937A7E96CFB7616f255b9AD9FF47363D4b',
+  18,
+  'DAI',
+  'Dai stable coin'
+)
+
+export const USDC_ZKSYNC_ERA_TESTNET = new Token(
+  SupportedChainId.ZKSYNC_ERA_TESTNET,
+  '0x0faF6df7054946141266420b43783387A78d82A9',
+  6,
+  'USDC',
+  'USD Coin'
+)
+
 export const UNI: { [chainId: number]: Token } = {
   [SupportedChainId.MAINNET]: new Token(SupportedChainId.MAINNET, UNI_ADDRESS[1], 18, 'UNI', 'Uniswap'),
   [SupportedChainId.GOERLI]: new Token(SupportedChainId.GOERLI, UNI_ADDRESS[5], 18, 'UNI', 'Uniswap'),
@@ -423,6 +446,20 @@ export const WRAPPED_NATIVE_CURRENCY: { [chainId: number]: Token | undefined } =
     18,
     'WBNB',
     'Wrapped BNB'
+  ),
+  [SupportedChainId.ZKSYNC_ERA]: new Token(
+    SupportedChainId.ZKSYNC_ERA,
+    '0x5aea5775959fbc2557cc8789bc1bf90a239d9a91',
+    18,
+    'WETH',
+    'Wrapped Ether'
+  ),
+  [SupportedChainId.ZKSYNC_ERA_TESTNET]: new Token(
+    SupportedChainId.ZKSYNC_ERA_TESTNET,
+    '0x440bac118befca196a87b0e0027137979a9549ce',
+    18,
+    'WETH',
+    'Wrapped Ether'
   ),
 }
 

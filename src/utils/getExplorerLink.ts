@@ -10,6 +10,8 @@ const BLOCK_EXPLORER_PREFIXES: { [chainId: number]: string } = {
   [SupportedChainId.CELO]: 'https://celoscan.io',
   [SupportedChainId.CELO_ALFAJORES]: 'https://alfajores-blockscout.celo-testnet.org',
   [SupportedChainId.BNB]: 'https://bscscan.com',
+  [SupportedChainId.ZKSYNC_ERA]: 'https://explorer.zksync.io',
+  [SupportedChainId.ZKSYNC_ERA_TESTNET]: 'https://goerli.explorer.zksync.io',
 }
 
 export enum ExplorerDataType {

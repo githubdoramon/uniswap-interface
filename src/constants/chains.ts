@@ -23,6 +23,9 @@ export enum SupportedChainId {
   CELO_ALFAJORES = 44787,
 
   BNB = 56,
+
+  ZKSYNC_ERA = 324,
+  ZKSYNC_ERA_TESTNET = 280,
 }
 
 export const CHAIN_IDS_TO_NAMES = {
@@ -37,44 +40,51 @@ export const CHAIN_IDS_TO_NAMES = {
   [SupportedChainId.OPTIMISM]: 'optimism',
   [SupportedChainId.OPTIMISM_GOERLI]: 'optimism_goerli',
   [SupportedChainId.BNB]: 'bnb',
+  [SupportedChainId.ZKSYNC_ERA]: 'era',
+  [SupportedChainId.ZKSYNC_ERA_TESTNET]: 'era_testnet',
 }
 
 /**
  * Array of all the supported chain IDs
  */
-export const ALL_SUPPORTED_CHAIN_IDS: SupportedChainId[] = Object.values(SupportedChainId).filter(
-  (id) => typeof id === 'number'
-) as SupportedChainId[]
+export const ALL_SUPPORTED_CHAIN_IDS: SupportedChainId[] = [
+  SupportedChainId.ZKSYNC_ERA,
+  SupportedChainId.ZKSYNC_ERA_TESTNET,
+] as SupportedChainId[]
 
 export function isSupportedChain(chainId: number | null | undefined): chainId is SupportedChainId {
   return !!chainId && !!SupportedChainId[chainId]
 }
 
 export const SUPPORTED_GAS_ESTIMATE_CHAIN_IDS = [
-  SupportedChainId.MAINNET,
-  SupportedChainId.POLYGON,
-  SupportedChainId.CELO,
-  SupportedChainId.OPTIMISM,
-  SupportedChainId.ARBITRUM_ONE,
-  SupportedChainId.BNB,
+  // SupportedChainId.MAINNET,
+  // SupportedChainId.POLYGON,
+  // SupportedChainId.CELO,
+  // SupportedChainId.OPTIMISM,
+  // SupportedChainId.ARBITRUM_ONE,
+  // SupportedChainId.BNB,
+  SupportedChainId.ZKSYNC_ERA,
 ] as const
 
 /**
  * Unsupported networks for V2 pool behavior.
  */
 export const UNSUPPORTED_V2POOL_CHAIN_IDS = [
-  SupportedChainId.POLYGON,
-  SupportedChainId.OPTIMISM,
-  SupportedChainId.ARBITRUM_ONE,
-  SupportedChainId.BNB,
-  SupportedChainId.ARBITRUM_GOERLI,
+  // SupportedChainId.POLYGON,
+  // SupportedChainId.OPTIMISM,
+  // SupportedChainId.ARBITRUM_ONE,
+  // SupportedChainId.BNB,
+  // SupportedChainId.ARBITRUM_GOERLI,
+  SupportedChainId.ZKSYNC_ERA,
+  SupportedChainId.ZKSYNC_ERA_TESTNET,
 ] as const
 
 export const TESTNET_CHAIN_IDS = [
-  SupportedChainId.GOERLI,
-  SupportedChainId.POLYGON_MUMBAI,
-  SupportedChainId.ARBITRUM_GOERLI,
-  SupportedChainId.OPTIMISM_GOERLI,
+  // SupportedChainId.GOERLI,
+  // SupportedChainId.POLYGON_MUMBAI,
+  // SupportedChainId.ARBITRUM_GOERLI,
+  // SupportedChainId.OPTIMISM_GOERLI,
+  SupportedChainId.ZKSYNC_ERA_TESTNET,
 ] as const
 
 export type SupportedTestnetChainId = typeof TESTNET_CHAIN_IDS[number]
@@ -83,13 +93,13 @@ export type SupportedTestnetChainId = typeof TESTNET_CHAIN_IDS[number]
  * All the chain IDs that are running the Ethereum protocol.
  */
 export const L1_CHAIN_IDS = [
-  SupportedChainId.MAINNET,
-  SupportedChainId.GOERLI,
-  SupportedChainId.POLYGON,
-  SupportedChainId.POLYGON_MUMBAI,
-  SupportedChainId.CELO,
-  SupportedChainId.CELO_ALFAJORES,
-  SupportedChainId.BNB,
+  // SupportedChainId.MAINNET,
+  // SupportedChainId.GOERLI,
+  // SupportedChainId.POLYGON,
+  // SupportedChainId.POLYGON_MUMBAI,
+  // SupportedChainId.CELO,
+  // SupportedChainId.CELO_ALFAJORES,
+  // SupportedChainId.BNB,
 ] as const
 
 export type SupportedL1ChainId = typeof L1_CHAIN_IDS[number]
@@ -99,10 +109,12 @@ export type SupportedL1ChainId = typeof L1_CHAIN_IDS[number]
  * The expectation is that all of these networks have immediate transaction confirmation.
  */
 export const L2_CHAIN_IDS = [
-  SupportedChainId.ARBITRUM_ONE,
-  SupportedChainId.ARBITRUM_GOERLI,
-  SupportedChainId.OPTIMISM,
-  SupportedChainId.OPTIMISM_GOERLI,
+  // SupportedChainId.ARBITRUM_ONE,
+  // SupportedChainId.ARBITRUM_GOERLI,
+  // SupportedChainId.OPTIMISM,
+  // SupportedChainId.OPTIMISM_GOERLI,
+  SupportedChainId.ZKSYNC_ERA,
+  SupportedChainId.ZKSYNC_ERA_TESTNET,
 ] as const
 
 export type SupportedL2ChainId = typeof L2_CHAIN_IDS[number]

@@ -89,6 +89,14 @@ export const FALLBACK_URLS = {
     'https://bsc-dataseed4.defibit.io',
     'https://rpc.ankr.com/bsc',
   ],
+  [SupportedChainId.ZKSYNC_ERA]: [
+    // "Safe" URLs
+    `https://mainnet.era.zksync.io`,
+  ],
+  [SupportedChainId.ZKSYNC_ERA_TESTNET]: [
+    // "Safe" URLs
+    `https://testnet.era.zksync.dev`,
+  ],
 }
 
 /**
@@ -128,4 +136,6 @@ export const RPC_URLS = {
   [SupportedChainId.CELO]: FALLBACK_URLS[SupportedChainId.CELO],
   [SupportedChainId.CELO_ALFAJORES]: FALLBACK_URLS[SupportedChainId.CELO_ALFAJORES],
   [SupportedChainId.BNB]: [QUICKNODE_RPC_URL, ...FALLBACK_URLS[SupportedChainId.BNB]],
+  [SupportedChainId.ZKSYNC_ERA]: [...FALLBACK_URLS[SupportedChainId.ZKSYNC_ERA]],
+  [SupportedChainId.ZKSYNC_ERA_TESTNET]: [...FALLBACK_URLS[SupportedChainId.ZKSYNC_ERA_TESTNET]],
 }

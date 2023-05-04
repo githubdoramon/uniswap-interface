@@ -17,6 +17,8 @@ import {
   DAI_BSC,
   DAI_OPTIMISM,
   DAI_POLYGON,
+  DAI_ZKSYNC_ERA,
+  DAI_ZKSYNC_ERA_TESTNET,
   ETH_BSC,
   ETH2X_FLI,
   FEI,
@@ -38,6 +40,7 @@ import {
   USDC_MAINNET,
   USDC_OPTIMISM,
   USDC_POLYGON,
+  USDC_ZKSYNC_ERA_TESTNET,
   USDT,
   USDT_ARBITRUM_ONE,
   USDT_BSC,
@@ -104,6 +107,12 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     FRAX_BSC,
     MATIC_BSC,
     CAKE_BSC,
+  ],
+  [SupportedChainId.ZKSYNC_ERA]: [...WRAPPED_NATIVE_CURRENCIES_ONLY[SupportedChainId.ZKSYNC_ERA], DAI_ZKSYNC_ERA],
+  [SupportedChainId.ZKSYNC_ERA_TESTNET]: [
+    ...WRAPPED_NATIVE_CURRENCIES_ONLY[SupportedChainId.ZKSYNC_ERA_TESTNET],
+    DAI_ZKSYNC_ERA_TESTNET,
+    USDC_ZKSYNC_ERA_TESTNET,
   ],
   [SupportedChainId.CELO]: [CUSD_CELO, CEUR_CELO, CMC02_CELO, PORTAL_USDC_CELO, PORTAL_ETH_CELO],
 }
@@ -203,6 +212,14 @@ export const COMMON_BASES: ChainCurrencyList = {
     ETH_BSC,
     BTC_BSC,
     BUSD_BSC,
+  ],
+
+  [SupportedChainId.ZKSYNC_ERA]: [nativeOnChain(SupportedChainId.ZKSYNC_ERA), DAI_ZKSYNC_ERA],
+
+  [SupportedChainId.ZKSYNC_ERA_TESTNET]: [
+    nativeOnChain(SupportedChainId.ZKSYNC_ERA_TESTNET),
+    DAI_ZKSYNC_ERA_TESTNET,
+    USDC_ZKSYNC_ERA_TESTNET,
   ],
 }
 

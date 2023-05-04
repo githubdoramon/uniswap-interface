@@ -1,4 +1,5 @@
 import { Trans } from '@lingui/macro'
+import { animated, useSpring } from '@react-spring/web'
 import { sendAnalyticsEvent, Trace, TraceEvent } from '@uniswap/analytics'
 import {
   BrowserEvent,
@@ -10,7 +11,6 @@ import {
 } from '@uniswap/analytics-events'
 import { Trade } from '@uniswap/router-sdk'
 import { Currency, CurrencyAmount, Percent, Token, TradeType } from '@uniswap/sdk-core'
-import { UNIVERSAL_ROUTER_ADDRESS } from '@uniswap/universal-router-sdk'
 import { useWeb3React } from '@web3-react/core'
 import { useToggleAccountDrawer } from 'components/AccountDrawer'
 import { sendEvent } from 'components/analytics'
@@ -40,7 +40,9 @@ import { TradeState } from 'state/routing/types'
 import styled, { useTheme } from 'styled-components/macro'
 import invariant from 'tiny-invariant'
 import { currencyAmountToPreciseFloat, formatTransactionAmount } from 'utils/formatNumbers'
+import { UNIVERSAL_ROUTER_ADDRESS } from 'utils/zksync'
 
+import SwapSuccess from '../../assets/images/swap_success.svg'
 import AddressInputPanel from '../../components/AddressInputPanel'
 import { ButtonError, ButtonLight, ButtonPrimary } from '../../components/Button'
 import { GrayCard } from '../../components/Card'
@@ -127,6 +129,12 @@ const DetailsSwapSection = styled(SwapSection)`
   border-top-right-radius: 0;
 `
 
+const SwapSuccessDiv = styled(animated.div)`
+  position: absolute;
+  right: 0;
+  top: 50%;
+`
+
 function getIsValidSwapQuote(
   trade: InterfaceTrade<Currency, Currency, TradeType> | undefined,
   tradeState: TradeState,
@@ -155,6 +163,49 @@ export default function Swap({ className }: { className?: string }) {
   const [newSwapQuoteNeedsLogging, setNewSwapQuoteNeedsLogging] = useState(true)
   const [fetchingSwapQuoteStartTime, setFetchingSwapQuoteStartTime] = useState<Date | undefined>()
   const swapWidgetEnabled = useSwapWidgetEnabled()
+
+  const [springs, api] = useSpring(() => ({
+    translateX: 250,
+    translateY: '-50%',
+    rotate: '-30deg',
+  }))
+
+  const animateIn = async () => {
+    await api.start({
+      from: {
+        translateX: 250,
+        translateY: '-50%',
+        rotate: '-30deg',
+      },
+      to: {
+        translateX: 0,
+        translateY: '-50%',
+        rotate: '-45deg',
+      },
+    })
+  }
+
+  const animateOut = async () => {
+    await api.start({
+      to: {
+        translateX: 250,
+        translateY: '-50%',
+        rotate: '-30deg',
+      },
+      from: {
+        translateX: 0,
+        translateY: '-50%',
+        rotate: '-45deg',
+      },
+    })
+  }
+
+  const showAndHide = async () => {
+    await animateIn()
+    setTimeout(async () => {
+      await animateOut()
+    }, 400)
+  }
 
   // token warning stuff
   const [loadedInputCurrency, loadedOutputCurrency] = [
@@ -309,7 +360,9 @@ export default function Swap({ className }: { className?: string }) {
       (parsedAmounts[Field.INPUT]?.currency.isToken
         ? (parsedAmounts[Field.INPUT] as CurrencyAmount<Token>)
         : undefined),
-    isSupportedChain(chainId) ? UNIVERSAL_ROUTER_ADDRESS(chainId) : undefined
+    isSupportedChain(chainId) ? UNIVERSAL_ROUTER_ADDRESS : undefined
+
+    //UNIVERSAL_ROUTER_ADDRESS(chainId)
   )
   const isApprovalLoading = allowance.state === AllowanceState.REQUIRED && allowance.isApprovalLoading
   const [isAllowancePending, setIsAllowancePending] = useState(false)
@@ -358,6 +411,7 @@ export default function Swap({ className }: { className?: string }) {
     swapCallback()
       .then((hash) => {
         setSwapState({ attemptingTxn: false, tradeToConfirm, showConfirm, swapErrorMessage: undefined, txHash: hash })
+        showAndHide()
         sendEvent({
           category: 'Swap',
           action: 'transaction hash',
@@ -736,6 +790,9 @@ export default function Swap({ className }: { className?: string }) {
           <NetworkAlert />
         </PageWrapper>
         <SwitchLocaleLink />
+        <SwapSuccessDiv style={{ ...springs }}>
+          <img src={SwapSuccess} style={{ width: '200px' }} />
+        </SwapSuccessDiv>
         {!swapIsUnsupported ? null : (
           <UnsupportedCurrencyFooter
             show={swapIsUnsupported}
