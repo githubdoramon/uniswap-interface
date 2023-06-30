@@ -2,7 +2,6 @@
 import { t, Trans } from '@lingui/macro'
 import { Percent } from '@uniswap/sdk-core'
 import { useWeb3React } from '@web3-react/core'
-import { sendEvent } from 'components/analytics'
 import { isSupportedChainId } from 'lib/hooks/routing/clientSideSmartOrderRouter'
 import { useRef, useState } from 'react'
 import { Settings, X } from 'react-feather'
@@ -205,7 +204,7 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
             <Text fontWeight={600} fontSize={14}>
               <Trans>Interface Settings</Trans>
             </Text>
-            {isSupportedChainId(chainId) && (
+            {/* {isSupportedChainId(chainId) && (
               <RowBetween>
                 <RowFixed>
                   <ThemedText.DeprecatedBlack fontWeight={400} fontSize={14} color={theme.textSecondary}>
@@ -225,7 +224,7 @@ export default function SettingsTab({ placeholderSlippage }: { placeholderSlippa
                   }}
                 />
               </RowBetween>
-            )}
+            )} */}
             <RowBetween>
               <RowFixed>
                 <ThemedText.DeprecatedBlack fontWeight={400} fontSize={14} color={theme.textSecondary}>

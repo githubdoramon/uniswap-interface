@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro'
+import { nativeOnChain } from '@matterlabs/uniswap-smart-order-router'
 import { formatCurrencyAmount } from '@uniswap/conedison/format'
 import { Currency, CurrencyAmount, TradeType } from '@uniswap/sdk-core'
-import { nativeOnChain } from '@uniswap/smart-order-router'
 import { SupportedChainId } from 'constants/chains'
 import { TransactionPartsFragment, TransactionStatus } from 'graphql/data/__generated__/types-and-hooks'
 import { useMemo } from 'react'

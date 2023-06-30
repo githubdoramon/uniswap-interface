@@ -1,5 +1,5 @@
+import { DAI_ARBITRUM } from '@matterlabs/uniswap-smart-order-router'
 import { SupportedChainId } from '@uniswap/sdk-core'
-import { DAI_ARBITRUM } from '@uniswap/smart-order-router'
 import { DAI, USDC_ARBITRUM, USDC_MAINNET } from 'constants/tokens'
 import { render } from 'test-utils'
 

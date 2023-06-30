@@ -1,3 +1,4 @@
+import { IMetric, MetricLoggerUnit, setGlobalMetric } from '@matterlabs/uniswap-smart-order-router'
 import { skipToken } from '@reduxjs/toolkit/query/react'
 import { Currency, CurrencyAmount, TradeType } from '@uniswap/sdk-core'
 import { sendTiming } from 'components/analytics'
@@ -6,7 +7,6 @@ import { useStablecoinAmountFromFiatValue } from 'hooks/useStablecoinPrice'
 import { useRoutingAPIArguments } from 'lib/hooks/routing/useRoutingAPIArguments'
 import ms from 'ms.macro'
 import { useMemo } from 'react'
-import { IMetric, MetricLoggerUnit, setGlobalMetric } from 'router_module'
 import { RouterPreference, useGetQuoteQuery } from 'state/routing/slice'
 
 import { InterfaceTrade, TradeState } from './types'
