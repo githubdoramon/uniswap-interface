@@ -309,7 +309,7 @@ export default function Swap({ className }: { className?: string }) {
       (parsedAmounts[Field.INPUT]?.currency.isToken
         ? (parsedAmounts[Field.INPUT] as CurrencyAmount<Token>)
         : undefined),
-    isSupportedChain(chainId) ? UNIVERSAL_ROUTER_ADDRESS : undefined
+    isSupportedChain(chainId) ? UNIVERSAL_ROUTER_ADDRESS[chainId as number] : undefined
 
     //UNIVERSAL_ROUTER_ADDRESS(chainId)
   )

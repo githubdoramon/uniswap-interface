@@ -377,6 +377,14 @@ export const USDC_ZKSYNC_ERA_TESTNET = new Token(
   'USD Coin'
 )
 
+export const USDC_ZKSYNC_ERA = new Token(
+  SupportedChainId.ZKSYNC_ERA,
+  '0x3355df6D4c9C3035724Fd0e3914dE96A5a83aaf4',
+  6,
+  'USDC',
+  'USD Coin'
+)
+
 export const UNI: { [chainId: number]: Token } = {
   [SupportedChainId.MAINNET]: new Token(SupportedChainId.MAINNET, UNI_ADDRESS[1], 18, 'UNI', 'Uniswap'),
   [SupportedChainId.GOERLI]: new Token(SupportedChainId.GOERLI, UNI_ADDRESS[5], 18, 'UNI', 'Uniswap'),

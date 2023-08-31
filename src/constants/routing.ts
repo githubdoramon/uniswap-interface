@@ -40,6 +40,7 @@ import {
   USDC_MAINNET,
   USDC_OPTIMISM,
   USDC_POLYGON,
+  USDC_ZKSYNC_ERA,
   USDC_ZKSYNC_ERA_TESTNET,
   USDT,
   USDT_ARBITRUM_ONE,
@@ -108,7 +109,11 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
     MATIC_BSC,
     CAKE_BSC,
   ],
-  [SupportedChainId.ZKSYNC_ERA]: [...WRAPPED_NATIVE_CURRENCIES_ONLY[SupportedChainId.ZKSYNC_ERA], DAI_ZKSYNC_ERA],
+  [SupportedChainId.ZKSYNC_ERA]: [
+    ...WRAPPED_NATIVE_CURRENCIES_ONLY[SupportedChainId.ZKSYNC_ERA],
+    DAI_ZKSYNC_ERA,
+    USDC_ZKSYNC_ERA,
+  ],
   [SupportedChainId.ZKSYNC_ERA_TESTNET]: [
     ...WRAPPED_NATIVE_CURRENCIES_ONLY[SupportedChainId.ZKSYNC_ERA_TESTNET],
     DAI_ZKSYNC_ERA_TESTNET,
@@ -214,7 +219,7 @@ export const COMMON_BASES: ChainCurrencyList = {
     BUSD_BSC,
   ],
 
-  [SupportedChainId.ZKSYNC_ERA]: [nativeOnChain(SupportedChainId.ZKSYNC_ERA), DAI_ZKSYNC_ERA],
+  [SupportedChainId.ZKSYNC_ERA]: [nativeOnChain(SupportedChainId.ZKSYNC_ERA), DAI_ZKSYNC_ERA, USDC_ZKSYNC_ERA],
 
   [SupportedChainId.ZKSYNC_ERA_TESTNET]: [
     nativeOnChain(SupportedChainId.ZKSYNC_ERA_TESTNET),

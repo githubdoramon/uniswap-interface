@@ -70,7 +70,7 @@ export function useUniversalRouterSwapCallback(
           })
           const tx = {
             from: account,
-            to: UNIVERSAL_ROUTER_ADDRESS, //UNIVERSAL_ROUTER_ADDRESS(chainId),
+            to: UNIVERSAL_ROUTER_ADDRESS[chainId as number], //UNIVERSAL_ROUTER_ADDRESS(chainId),
             data,
             // TODO(https://github.com/Uniswap/universal-router-sdk/issues/113): universal-router-sdk returns a non-hexlified value.
             ...(value && !isZero(value) ? { value: toHex(value) } : {}),

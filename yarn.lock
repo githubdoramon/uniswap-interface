@@ -2852,10 +2852,10 @@
   resolved "https://registry.yarnpkg.com/@looksrare/sdk/-/sdk-0.10.2.tgz#08b14cb6d3a5499ad0417c817dbb2da924477f4f"
   integrity sha512-K3VVq7rpS0hD5IwfhAcAPJZO5IjL0VbL89Zl04x8WnLsFOwXHzsUkxUpRrL8ko2/bgZdgTqWgUWCvbSoVr8hzw==
 
-"@matterlabs/uniswap-smart-order-router@^3.11.2":
-  version "3.11.2"
-  resolved "https://registry.yarnpkg.com/@matterlabs/uniswap-smart-order-router/-/uniswap-smart-order-router-3.11.2.tgz#7b4605602177aa882cdfa21ec7f6623ad16c1e09"
-  integrity sha512-Pbr3uyELNQUusMV8QAf+HcF/KRkMA6k9AfxG0NND6JvB34SIPQ/qWT3IW84yQFnGZ3gNIUTh/tJzzljuU87hhw==
+"@matterlabs/uniswap-smart-order-router@^3.11.5":
+  version "3.11.5"
+  resolved "https://registry.yarnpkg.com/@matterlabs/uniswap-smart-order-router/-/uniswap-smart-order-router-3.11.5.tgz#bdb99233f5f3a3504006ca6e1e6d0146a44e4c8a"
+  integrity sha512-t8eqmqVSY/gkTbHujVKqUotdV4nYNf7IXplvmyL2krPNrVBytRF7lfDcW8TwLk9yzqgW4NvfkOV8loEfQpLCzw==
   dependencies:
     "@uniswap/default-token-list" "^2.0.0"
     "@uniswap/permit2-sdk" "^1.2.0"

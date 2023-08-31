@@ -36,12 +36,16 @@ export type Allowance =
   | AllowanceRequired
 
 export default function usePermit2Allowance(amount?: CurrencyAmount<Token>, spender?: string): Allowance {
-  const { account } = useWeb3React()
+  const { account, chainId } = useWeb3React()
   const token = amount?.currency
 
-  const { tokenAllowance, isSyncing: isApprovalSyncing } = useTokenAllowance(token, account, PERMIT2_ADDRESS)
+  const { tokenAllowance, isSyncing: isApprovalSyncing } = useTokenAllowance(
+    token,
+    account,
+    PERMIT2_ADDRESS[chainId as number]
+  )
 
-  const updateTokenAllowance = useUpdateTokenAllowance(amount, PERMIT2_ADDRESS)
+  const updateTokenAllowance = useUpdateTokenAllowance(amount, PERMIT2_ADDRESS[chainId as number])
   const isApproved = useMemo(() => {
     if (!amount || !tokenAllowance) return false
     return tokenAllowance.greaterThan(amount) || tokenAllowance.equalTo(amount)
@@ -52,7 +56,7 @@ export default function usePermit2Allowance(amount?: CurrencyAmount<Token>, spen
   // until it has been re-observed. It wll sync immediately, because confirmation fast-forwards the block number.
   const [approvalState, setApprovalState] = useState(ApprovalState.SYNCED)
   const isApprovalLoading = approvalState !== ApprovalState.SYNCED
-  const isApprovalPending = useHasPendingApproval(token, PERMIT2_ADDRESS)
+  const isApprovalPending = useHasPendingApproval(token, PERMIT2_ADDRESS[chainId as number])
   useEffect(() => {
     if (isApprovalPending) {
       setApprovalState(ApprovalState.PENDING)
